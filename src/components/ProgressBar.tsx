@@ -45,18 +45,18 @@ const ProgressBarItem: React.FC<{
   nextCurrent?: boolean;
 }> = ({ id, title, status, totalSteps, current, nextCurrent, nextStatus }) => {
   return (
-    <div className="flex flex-col w-full sm:hidden md:flex">
+    <div className="flex flex-col w-full pt-5  lg:flex xl:flex 2xl:flex max-w-screen">
       {/* Step Title */}
-      <div className={`flex gap-2 text-[0.8vw] py-2 ${status || current ? "opacity-100" : "opacity-40"}`}>
-        <h1 className="font-bold text-xl">0{id}</h1>
-        <p className="font-semibold text-md text-gray-500">{title}</p>
+      <div className={`flex gap-2 text-[0.8vw] ${status || current ? "opacity-100" : "opacity-40"}`}>
+        <h1 className="font-bold text-sm xl:text-xl">0{id}</h1>
+        <p className="font-semibold text-md text-gray-500 hidden md:block">{title}</p>
       </div>
 
       {/* Circle and Line Container */}
       <div className="flex items-center w-full gap-2">
         {/* Circular Step Icon */}
         <div
-          className={`z-10 w-10 h-10 flex items-center justify-center rounded-full border-2 ${
+          className={`z-10 w-[2vw] h-[2vw]  flex items-center justify-center rounded-full border-2 ${
             current
               ? ' border-blue-500 text-blue-500 border-4' // Dotted border for current step
               : status
