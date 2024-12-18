@@ -9,7 +9,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Calculator, MapPin, Languages, FileText, FileCode, Upload, Plus } from "lucide-react";
-import { Langar } from "next/font/google";
 import { useToast } from "@/hooks/use-toast"
 
 const agreementUnderDisputes = ["Upload the contract", "Arbitration Agreement"];
