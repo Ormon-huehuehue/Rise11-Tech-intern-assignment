@@ -81,7 +81,6 @@ export default function ClaimForm() {
                   placeholder="Enter amount" 
                   value={contractValue}
                   className="bg-background text-xs sm:text-sm" 
-                  //@ts-ignore
                   onChange={(e) => {
                     setContractValue(e.target.value)
                     setClaimValue(Number(e.target.value)*1.5)
