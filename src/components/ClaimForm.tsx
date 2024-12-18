@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import {useState} from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -10,7 +10,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Calculator, MapPin, Languages, FileText, FileCode, Upload, Plus } from 'lucide-react'
 
+
+
+const agreementUnderDisputes = [
+  "Upload the contract",
+  "Arbitration Agreement"
+]
+
+
 export default function ClaimForm() {
+
+  const [contractValue, setContractValue] = useState("")
+  const [claimValue, setClaimValue] = useState("")
+  const [currency, setCurrency] = useState("USD")
+  const [place, setPlace] = useState("")
+  const [language, setLanguage] = useState("")
+  const [placeAgreement, setPlaceAgreement] = useState("no")
+  const [languageAgreement, setLanguageAgreement] = useState("no")
+  const [statement, setStatement] = useState("")
+  
+
+
   return (
     <div className="container mx-auto py-6 w-full px-8 bg-white rounded-3xl">
       <div className="mb-8">
@@ -31,7 +51,7 @@ export default function ClaimForm() {
             <div className="space-y-2">
               <Label>Contract Value</Label>
               <div className="flex gap-2">
-                <Input type="number" placeholder="10,00.00" />
+                <Input type="number" placeholder="Enter amount" className= "bg-background"/>
                 <Select defaultValue="USD">
                   <SelectTrigger className="w-24">
                     <SelectValue placeholder="USD" />
@@ -47,7 +67,7 @@ export default function ClaimForm() {
             <div className="space-y-2">
               <Label>Claim Value</Label>
               <div className="flex gap-2">
-                <Input type="number" placeholder="15,00.00" />
+                <Input type="number" placeholder="Enter amount" className= "bg-background"/>
                 <Select defaultValue="USD">
                   <SelectTrigger className="w-24">
                     <SelectValue placeholder="USD" />
@@ -146,15 +166,9 @@ export default function ClaimForm() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <Textarea placeholder="Write your Statement Here" className="min-h-[00px]" />
+              <Textarea placeholder="Write your Statement Here" className="min-h-[00px] bg-background" />
               <div className="flex items-center justify-center w-full">
-                <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50">
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <Upload className="h-8 w-8 text-blue-500 mb-2" />
-                    <p className="text-sm text-gray-500">Upload a PDF</p>
-                  </div>
-                  <input type="file" className="hidden" accept=".pdf" />
-                </label>
+                <UploadButton title="Upload a PDF"/>
               </div>
             </div>
           </CardContent>
@@ -170,16 +184,11 @@ export default function ClaimForm() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50">
-                <Upload className="h-8 w-8 text-blue-500 mb-2" />
-                <p className="text-xs text-center text-gray-500">Upload the Contract<br />Max 2MB, PDF</p>
-                <input type="file" className="hidden" accept=".pdf" />
+              {agreementUnderDisputes.map((item, index)=>(
+            <div key={index}  className="flex items-center justify-center w-full">
+                <UploadButton title ={item}/>
               </div>
-              <div className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50">
-                <Upload className="h-8 w-8 text-blue-500 mb-2" />
-                <p className="text-xs text-center text-gray-500">Arbitration Agreement<br />Max 2MB, PDF</p>
-                <input type="file" className="hidden" accept=".pdf" />
-              </div>
+              ))}
             </div>
           </CardContent>
         </Card>
@@ -194,10 +203,14 @@ export default function ClaimForm() {
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-4">
-              <div className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50">
-                <Upload className="h-8 w-8 text-blue-500 mb-2" />
-                <p className="text-xs text-center text-gray-500">Upload the Contract<br />Max 2MB, PDF</p>
-                <input type="file" className="hidden" accept=".pdf" />
+            <div className="flex items-center justify-center w-full">
+                <label className="flex flex-col bg-background items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50">
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <Upload className="h-8 w-8 text-blue-500 mb-2" />
+                    <p className="text-sm text-gray-500">Upload the Contract</p>
+                  </div>
+                  <input type="file" className="hidden" accept=".pdf" />
+                </label>
               </div>
               <Button size="icon" variant="outline" className="rounded-full h-12 w-12 flex-shrink-0">
                 <Plus className="h-6 w-6" />
@@ -210,3 +223,15 @@ export default function ClaimForm() {
   )
 }
 
+
+const UploadButton = ({title}: { title : string})=>{
+  return(
+    <label className="flex flex-col bg-background items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50">
+    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+      <Upload className="h-8 w-8 text-blue-500 mb-2" />
+      <p className="text-sm text-gray-500">{title}</p>
+    </div>
+    <input type="file" className="hidden" accept=".pdf" />
+  </label>
+  )
+}
