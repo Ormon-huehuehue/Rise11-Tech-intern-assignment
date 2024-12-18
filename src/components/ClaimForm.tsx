@@ -9,18 +9,53 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Calculator, MapPin, Languages, FileText, FileCode, Upload, Plus } from "lucide-react";
+import { Langar } from "next/font/google";
+import { useToast } from "@/hooks/use-toast"
 
 const agreementUnderDisputes = ["Upload the contract", "Arbitration Agreement"];
 
 export default function ClaimForm() {
-  const [contractValue, setContractValue] = useState("");
-  const [claimValue, setClaimValue] = useState("");
-  const [currency, setCurrency] = useState("USD");
-  const [place, setPlace] = useState("");
+
+  const { toast } = useToast()
+
+
+  const [contractValue, setContractValue] = useState<string | number>("");
+  const [claimValue, setClaimValue] = useState<number>(0);
+  const [currency, setCurrency] = useState<string>("INR");
+  const [place, setPlace] = useState("Delhi");
   const [language, setLanguage] = useState("");
   const [placeAgreement, setPlaceAgreement] = useState("no");
   const [languageAgreement, setLanguageAgreement] = useState("no");
   const [statement, setStatement] = useState("");
+
+
+  const submitHandler = ()=>{
+
+    if(contractValue == "" || claimValue==0){
+      toast({
+        title: "All Fields are necessary",
+        description: "Make sure you fill all the fields and upload necessary files",
+        variant : "destructive"
+      })
+    }
+
+    if(statement == ""){
+      toast({
+        title: "All Fields are necessary",
+        description: "Make sure you fill all the fields and upload necessary files",
+        variant : "destructive"
+      })
+    }
+
+    if(language == ""){
+      toast({
+        title: "All Fields are necessary",
+        description: "Make sure you fill all the fields and upload necessary files",
+        variant : "destructive"
+      })
+    }
+
+  }
 
   return (
     <div className=" mx-auto px-4 sm:px-6 lg:px-8 pb-5">
@@ -45,9 +80,13 @@ export default function ClaimForm() {
                 <Input 
                   type="number" 
                   placeholder="Enter amount" 
-                  className="bg-background text-xs sm:text-sm" 
                   value={contractValue}
-                  onChange={(e) => setContractValue(e.target.value)}
+                  className="bg-background text-xs sm:text-sm" 
+                  //@ts-ignore
+                  onChange={(e) => {
+                    setContractValue(e.target.value)
+                    setClaimValue(Number(e.target.value)*1.5)
+                  }}
                 />
                 <Select 
                   value={currency} 
@@ -59,7 +98,7 @@ export default function ClaimForm() {
                   <SelectContent>
                     <SelectItem value="USD">USD</SelectItem>
                     <SelectItem value="EUR">EUR</SelectItem>
-                    <SelectItem value="GBP">GBP</SelectItem>
+                    <SelectItem value="INR">INR</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -69,10 +108,12 @@ export default function ClaimForm() {
               <div className="flex gap-2">
                 <Input 
                   type="number" 
-                  placeholder="Enter amount" 
+                  placeholder="Enter amount in contract value to find out the claim value" 
                   className="bg-background text-xs sm:text-sm" 
                   value={claimValue}
-                  onChange={(e) => setClaimValue(e.target.value)}
+                  onChange={()=>{
+                    console.log("Claim value changed haha : ", claimValue)
+                  }}
                 />
                 <Select 
                   value={currency} 
@@ -84,7 +125,7 @@ export default function ClaimForm() {
                   <SelectContent>
                     <SelectItem value="USD">USD</SelectItem>
                     <SelectItem value="EUR">EUR</SelectItem>
-                    <SelectItem value="GBP">GBP</SelectItem>
+                    <SelectItem value="INR">INR</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -110,9 +151,9 @@ export default function ClaimForm() {
                 <SelectValue placeholder="Select the Place for proceedings" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="london">London</SelectItem>
-                <SelectItem value="paris">Paris</SelectItem>
-                <SelectItem value="newyork">New York</SelectItem>
+                <SelectItem value="Delhi">Delhi</SelectItem>
+                <SelectItem value="Gurgaon">Gurgaon</SelectItem>
+                <SelectItem value="Chandigarh">Chandigarh</SelectItem>
               </SelectContent>
             </Select>
             <div className="space-y-2">
@@ -155,8 +196,8 @@ export default function ClaimForm() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="english">English</SelectItem>
-                <SelectItem value="french">French</SelectItem>
-                <SelectItem value="german">German</SelectItem>
+                <SelectItem value="hindi">hindi</SelectItem>
+                <SelectItem value="haryanvi">haryanvi</SelectItem>
               </SelectContent>
             </Select>
             <div className="space-y-2">
@@ -240,6 +281,16 @@ export default function ClaimForm() {
                 className="rounded-full h-10 w-10 sm:h-12 sm:w-12 flex-shrink-0"
               >
                 <Plus className="h-4 w-4 sm:h-6 sm:w-6" />
+              </Button>
+            </div>
+            {/* submit button */}
+            <div className = "flex py-5 justify-center w-full">
+              <Button 
+                variant="outline" 
+                className="h-10 flex px-20 w-max font-montserrat"
+                onClick={submitHandler}
+                >
+                <h1> Submit</h1>
               </Button>
             </div>
           </CardContent>
