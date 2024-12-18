@@ -7,15 +7,17 @@ Approach:-
 
 Planning: I started by carefully reviewing the provided design mockup and understanding the different sections and functionality required for the claims processing workflow.
 UI Layout: 
-Component Design: I broke down the UI into reusable components, such as the sidebar navigation, the claims filing form, and the document upload sections. This allows for better maintainability and easier testing.
+Component Design: I broke down the UI into reusable components, such as the sidebar, navigation bar, progress bar, the claims filing form, and the document upload sections. This allows for better maintainability and easier testing.
 Styling: I utilized Tailwind CSS to ensure a consistent and responsive design across the application.
 Error Handling: I added robust error handling and validation to the claims filing form to provide a seamless user experience and ensure data integrity.
-Deployment: Finally, I set up continuous integration and deployment workflows to automatically build and deploy the Next.js application to a hosting platform, such as Vercel or Netlify.
+Deployment: I finally deployed the project on Vercel.
+
+Live link : https://rise11-tech-intern-assignment-armaan.vercel.app/
 
 Getting Started
 To run the application locally, follow these steps:
 
-Clone the repository: git clone https://github.com/your-username/jur-claims-processing.git
+Clone the repository: git clone git@github.com:Ormon-huehuehue/Rise11-Tech-intern-assignment.git
 Install dependencies: npm install
 Start the development server: npm run dev
 Open the application in your browser: http://localhost:3000
