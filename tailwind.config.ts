@@ -9,9 +9,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
+        background: '#f4f5fc',
         foreground: "var(--foreground)",
+        sidebarText: '#889cb2',
       },
+      fontFamily : {
+        palanquin: ['Palanquin', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+        amatic : ['Amatic SC', 'sans-serif'],
+      }
     },
   },
   plugins: [],
